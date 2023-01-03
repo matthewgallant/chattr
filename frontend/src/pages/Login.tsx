@@ -1,6 +1,9 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const LoginPage = () => {
+    let navigate = useNavigate();
+
     const [formData, setFormData] = useState({
         email: '',
         password: '',
@@ -13,13 +16,29 @@ const LoginPage = () => {
         }))
     }
 
-    const onSubmit = (e: React.FormEvent) => {
+    const onSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
+        
+        // Attempt to send login data
+        const res = await fetch('/api/account/login', {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(formData)
+        })
 
-        fetch('/api/account/login', { method: 'POST', headers: { "Content-Type": "application/json" }, body: JSON.stringify(formData) })
-            .then((res) => res.json())
-            .then((data) => console.log(data))
-            .catch((error) => console.error(error))
+        // Return if an error occurred
+        if (!res.ok) return
+        
+        // Parse data and save user JWT to Local Storage
+        const data = await res.json()
+        if (data.token) {
+            await localStorage.setItem('user', JSON.stringify(data.token))
+            navigate('/dashboard')
+        } else {
+            console.error("No token was sent back.")
+        }
     }
 
     return (
