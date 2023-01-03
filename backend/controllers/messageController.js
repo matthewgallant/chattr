@@ -8,23 +8,6 @@ const asyncHandler = require('express-async-handler')
 const checkRequired = require('../utilities/checkRequired')
 const Message = require('../models/messageModel')
 
-// @desc    Get messages from a channel
-// @route   GET /api/message
-// @access  Private
-const getMessages = asyncHandler(async (req, res) => {
-    checkRequired(['channel'], req, res)
-
-    const messages = await Message.find({
-        channel: req.body.channel
-    })
-
-    if (messages) {
-        res.status(200).json(messages)
-    } else {
-        throw new Error("Unable to load messages. Please try again.")
-    }
-})
-
 // @desc    Send a message to a channel
 // @route   POST /api/message
 // @access  Private
@@ -44,8 +27,23 @@ const sendMessage = asyncHandler(async (req, res) => {
     }
 })
 
+// @desc    Get messages from a channel
+// @route   GET /api/message/:id
+// @access  Private
+const getMessages = asyncHandler(async (req, res) => {
+    const messages = await Message.find({
+        channel: req.params.id
+    })
+
+    if (messages) {
+        res.status(200).json(messages)
+    } else {
+        throw new Error("Unable to load messages. Please try again.")
+    }
+})
+
 // @desc    Edit a message in a channel
-// @route   PUT /api/message
+// @route   PUT /api/message/:id
 // @access  Private
 const editMessage = asyncHandler(async (req, res) => {
     checkRequired(['message'], req, res)
@@ -65,7 +63,7 @@ const editMessage = asyncHandler(async (req, res) => {
 })
 
 // @desc    Delete a message in a channel
-// @route   DELETE /api/message
+// @route   DELETE /api/message/:id
 // @access  Private
 const deleteMessage = asyncHandler(async (req, res) => {
     let message = await checkMessage(req, res)

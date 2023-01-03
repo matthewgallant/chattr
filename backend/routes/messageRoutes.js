@@ -15,9 +15,9 @@ const {
 } = require('../controllers/messageController')
 
 messageRouter.route('/')
-    .get(auth, getMessages)
     .post(auth, sendMessage)
 messageRouter.route('/:id')
+    .get(auth, getMessages)
     .put(auth, editMessage)
     .delete(auth, deleteMessage)
 
