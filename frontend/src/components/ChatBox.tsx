@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom"
 
 import { Message } from "../interfaces/MessageInterface"
 
-import { FaPaperPlane } from "react-icons/fa"
+import { FaPaperPlane, FaSpinner } from "react-icons/fa"
 
 interface Props {
     messages: Message[],
@@ -13,9 +13,11 @@ interface Props {
 const ChatBox = (props: Props) => {
     let { id } = useParams()
     const [message, setMessage] = useState("")
+    const [isSubmitting, setIsSubmitting] = useState(false)
 
     const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
+        setIsSubmitting(true)
 
         const fetchData = {
             method: "POST",
@@ -37,8 +39,13 @@ const ChatBox = (props: Props) => {
 
                 // Temporarily add message to local messages
                 props.setMessages([...props.messages, { message: message }])
+
+                setIsSubmitting(false)
             })
-            .catch(err => console.error(err))
+            .catch(err => {
+                console.error(err)
+                setIsSubmitting(false)
+            })
     }
 
     const onChange = (e: React.FormEvent<HTMLInputElement>) => {
@@ -49,7 +56,10 @@ const ChatBox = (props: Props) => {
         <form className="ChatBox" onSubmit={onSubmit}>
             <input type="text" value={message} onChange={onChange} placeholder="Send a message..." className="ChatBox__field" />
             <button type="submit" className="ChatBox__button">
-                <FaPaperPlane />
+                {isSubmitting
+                    ? <FaSpinner className="Spinner" />
+                    : <FaPaperPlane />
+                }
             </button>
         </form>
     )
