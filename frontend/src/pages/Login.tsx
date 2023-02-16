@@ -35,7 +35,7 @@ const LoginPage = () => {
         const data = await res.json()
         if (data.token) {
             await localStorage.setItem('user', JSON.stringify(data.token))
-            navigate('/dashboard')
+            navigate('/channel')
         } else {
             console.error("No token was sent back.")
         }

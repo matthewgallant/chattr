@@ -8,7 +8,7 @@ interface Props {
 const Sidebar = (props: Props) => {
     return (
         <div className="Sidebar">
-            <div className="Sidebar-logo">Logo</div>
+            <Link to="/" className="Sidebar-logo">chattr</Link>
             <div className="Sidebar-channels">
                 {props.channels.map((channel, index) => 
                     <div key={(index)}>
@@ -16,7 +16,7 @@ const Sidebar = (props: Props) => {
                     </div>
                 )}
             </div>
-            <div className="Sidebar-account">Account</div>
+            <Link to="/account" className="Sidebar-account">Account</Link>
         </div>
     )
 }
