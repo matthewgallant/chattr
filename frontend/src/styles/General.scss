@@ -1,0 +1,13 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--background);
+    color: white;
+}
+
+a {
+    color: inherit;
+
+    &:hover {
+        color: #BDBDBD;
+    }
+}

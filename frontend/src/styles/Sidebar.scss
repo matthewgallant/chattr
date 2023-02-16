@@ -1,0 +1,23 @@
+.Sidebar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--primary);
+    padding: 20px;
+
+    a {
+        text-decoration: none;
+    }
+}
+
+.Sidebar-logo {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.Sidebar-channels {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-grow: 1;
+}

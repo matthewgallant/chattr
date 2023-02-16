@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom"
 
 import { Message } from "../interfaces/MessageInterface"
 
+import { FaPaperPlane } from "react-icons/fa"
+
 interface Props {
     messages: Message[],
     setMessages: Function
@@ -45,8 +47,10 @@ const ChatBox = (props: Props) => {
 
     return (
         <form className="ChatBox" onSubmit={onSubmit}>
-            <input type="text" value={message} onChange={onChange} className="ChatBox__field" />
-            <button type="submit" className="ChatBox__button">Send</button>
+            <input type="text" value={message} onChange={onChange} placeholder="Send a message..." className="ChatBox__field" />
+            <button type="submit" className="ChatBox__button">
+                <FaPaperPlane />
+            </button>
         </form>
     )
 }
