@@ -26,7 +26,7 @@ const ChannelPage = () => {
         <ProtectedPage>
             <div className="ChannelPage">
                 <Sidebar channels={channels} />
-                <ChatWindow />
+                <ChatWindow channels={channels} />
             </div>
         </ProtectedPage>
     )

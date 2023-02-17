@@ -3,13 +3,20 @@ import { useParams } from "react-router-dom"
 
 import ChatTimeline from './ChatTimeline'
 import ChatBox from './ChatBox'
+import ChatHeader from './ChatHeader'
 
 import { Message } from "../interfaces/MessageInterface"
+import { Channel } from "../interfaces/ChannelInterface"
 
-const ChatWindow = () => {
+interface Props {
+    channels: Channel[]
+}
+
+const ChatWindow = (props: Props) => {
     let { id } = useParams()
     const messagesEndRef = useRef<null | HTMLDivElement>(null)
     const [messages, setMessages] = useState<Message[]>([])
+    const [channelName, setChannelName] = useState<string | undefined>("")
 
     const fetchChats = async () => {
         if (id) {
@@ -34,11 +41,16 @@ const ChatWindow = () => {
     }, [id])
 
     useEffect(() => {
+        setChannelName(props.channels.find(channel => channel._id === id)?.name)
+    }, [props.channels, id])
+
+    useEffect(() => {
         messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
+    }, [messages])
 
     return (
         <div className="ChatWindow">
-            <ChatTimeline messages={messages} />
+            <ChatHeader channelName={channelName} />
             <ChatTimeline messages={messages} messagesEndRef={messagesEndRef} />
             <ChatBox messages={messages} setMessages={setMessages} />
         </div>
