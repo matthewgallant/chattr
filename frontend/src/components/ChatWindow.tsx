@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import { useParams } from "react-router-dom"
 
 import ChatTimeline from './ChatTimeline'
@@ -8,6 +8,7 @@ import { Message } from "../interfaces/MessageInterface"
 
 const ChatWindow = () => {
     let { id } = useParams()
+    const messagesEndRef = useRef<null | HTMLDivElement>(null)
     const [messages, setMessages] = useState<Message[]>([])
 
     const fetchChats = async () => {
@@ -32,9 +33,13 @@ const ChatWindow = () => {
         return () => clearInterval(interval);
     }, [id])
 
+    useEffect(() => {
+        messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
+
     return (
         <div className="ChatWindow">
             <ChatTimeline messages={messages} />
+            <ChatTimeline messages={messages} messagesEndRef={messagesEndRef} />
             <ChatBox messages={messages} setMessages={setMessages} />
         </div>
     )

@@ -1,7 +1,9 @@
+import { ForwardedRef } from "react"
 import { Message } from "../interfaces/MessageInterface"
 
 interface Props {
-    messages: Message[]
+    messages: Message[],
+    messagesEndRef: ForwardedRef<HTMLDivElement>
 }
 
 const ChatTimeline = (props: Props) => {
@@ -10,6 +12,7 @@ const ChatTimeline = (props: Props) => {
             {props.messages.map((message, index) => (
                 <div className="Message" key={index}>{message.message}</div>
             ))}
+            <div ref={props.messagesEndRef} />
         </div>
     )
 }
