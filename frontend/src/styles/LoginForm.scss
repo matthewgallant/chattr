@@ -1,0 +1,11 @@
+.LoginForm {
+    display: flex;
+    flex-direction: column;
+    padding: 50px;
+    background-color: var(--tertiary);
+    border-radius: 5px;
+    row-gap: 20px;
+    min-width: 500px;
+    min-height: 500px;
+    justify-content: center;
+}

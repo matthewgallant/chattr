@@ -44,20 +44,24 @@ const LoginPage = () => {
     return (
         <div className="LoginPage">
             <form onSubmit={onSubmit} className="LoginForm">
+                <h1>chattr login</h1>
                 <input
                     type="email"
                     placeholder="Email address"
                     name="email"
+                    className="TextField"
                     value={formData.email}
                     onChange={onChange}  />
                 <input
                     type="password"
                     placeholder="Password"
                     name="password"
+                    className="TextField"
                     value={formData.password}
                     onChange={onChange}  />
                 <input
                     type="submit"
+                    className="Button"
                     value="Login" />
             </form>
         </div>
