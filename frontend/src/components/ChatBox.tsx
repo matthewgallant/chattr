@@ -54,8 +54,8 @@ const ChatBox = (props: Props) => {
 
     return (
         <form className="ChatBox" onSubmit={onSubmit}>
-            <input type="text" value={message} onChange={onChange} placeholder="Send a message..." className="ChatBox__field" />
-            <button type="submit" className="ChatBox__button">
+            <input type="text" value={message} onChange={onChange} placeholder="Send a message..." className="TextField" />
+            <button type="submit" className="Button">
                 {isSubmitting
                     ? <FaSpinner className="Spinner" />
                     : <FaPaperPlane />

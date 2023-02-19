@@ -6,11 +6,20 @@
     --hover: #B388FF;
 }
 
+// Core Modules
 @import './Reset.scss';
-@import './General.scss';
+@import './Other.scss';
 
-@import './Chat.scss';
-@import './Channel.scss';
+// Components
+@import './Button.scss';
+@import './ChannelPage.scss';
+@import './ChatBox.scss';
+@import './ChatHeader.scss';
+@import './ChatTimeline.scss';
+@import './ChatWindow.scss';
+@import './LoginForm.scss';
+@import './LoginPage.scss';
 @import './Message.scss';
 @import './Sidebar.scss';
 @import './Spinner.scss';
+@import './TextField.scss';
